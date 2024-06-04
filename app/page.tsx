@@ -27,7 +27,8 @@ export default function Index(): React.JSX.Element {
               </Link>
               <p className="mb-3 line-clamp-3 text-pretty font-normal text-gray-400">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Numquam excepturi distinctio eaque consectetur debitis dolore.
+                Voluptates laboriosam neque vero rerum iure similique nostrum
+                natus eligendi, velit labore.
               </p>
               <Link
                 href="/"
