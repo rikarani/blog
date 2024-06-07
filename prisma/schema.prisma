@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model Post {
+  id          String   @id @default(uuid())
+  author      User     @relation(fields: [author_id], references: [id], onDelete: Cascade)
+  author_id   Int
+  category    Category @relation(fields: [category_id], references: [id], onDelete: Cascade)
+  category_id Int
+  title       String   @unique @db.Text
+  excerpt     String   @db.Text
+  content     String   @db.Text
+
+  @@map("posts")
+}
+
+model Category {
+  id    Int    @id @default(autoincrement())
+  name  String @db.VarChar(255)
+  slug  String @unique @db.VarChar(255)
+  posts Post[]
+
+  @@map("categories")
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  name     String @db.VarChar(255)
+  username String @unique @db.VarChar(255)
+  password String @db.VarChar(255)
+  posts    Post[]
+
+  @@map("users")
+}
