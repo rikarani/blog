@@ -17,25 +17,31 @@ model Post {
   title       String   @unique @db.Text
   excerpt     String   @db.Text
   content     String   @db.Text
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now()) @updatedAt
 
   @@map("posts")
 }
 
 model Category {
-  id    Int    @id @default(autoincrement())
-  name  String @db.VarChar(255)
-  slug  String @unique @db.VarChar(255)
-  posts Post[]
+  id         Int      @id @default(autoincrement())
+  name       String   @db.VarChar(255)
+  slug       String   @unique @db.VarChar(255)
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+  posts      Post[]
 
   @@map("categories")
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  name     String @db.VarChar(255)
-  username String @unique @db.VarChar(255)
-  password String @db.VarChar(255)
-  posts    Post[]
+  id         Int      @id @default(autoincrement())
+  name       String   @db.VarChar(255)
+  username   String   @unique @db.VarChar(255)
+  password   String   @db.VarChar(255)
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+  posts      Post[]
 
   @@map("users")
 }
