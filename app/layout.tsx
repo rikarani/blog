@@ -19,12 +19,7 @@ const inter = Inter({
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={cn(
-          "dark h-dvh bg-background font-sans antialiased",
-          inter.variable,
-        )}
-      >
+      <body className={cn("dark h-dvh bg-background font-sans antialiased", inter.variable)}>
         {children}
       </body>
     </html>

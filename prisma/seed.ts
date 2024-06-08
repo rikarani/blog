@@ -41,8 +41,8 @@ async function main() {
       id: v4(),
       author: { connect: { id: users[authorIndex].id } },
       category: { connect: { id: categories[postIndex].id } },
-      title: faker.lorem.sentence({ min: 5, max: 8 }),
-      excerpt: faker.lorem.sentences({ min: 1, max: 3 }),
+      title: faker.lorem.sentence({ min: 4, max: 6 }),
+      excerpt: faker.lorem.sentences({ min: 3, max: 5 }),
       content: `<p>${faker.lorem.paragraphs({ min: 5, max: 9 }, "</p><p>")}</p>`,
     };
 
