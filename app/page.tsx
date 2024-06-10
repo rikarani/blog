@@ -8,6 +8,7 @@ import Show from "@/components/show";
 import Card from "@/components/card";
 import prisma from "@/prisma/client";
 import Navbar from "@/components/navbar";
+import photo from "../public/118950699_p0.png";
 
 export default async function Index(): Promise<React.JSX.Element> {
   const posts = await prisma.post.findMany({
@@ -31,14 +32,9 @@ export default async function Index(): Promise<React.JSX.Element> {
             {posts.map((post) => {
               return (
                 <Card key={post.id}>
-                  <Card.Header slug={post.category.slug} label={post.category.name}>
-                    <Image
-                      src={`https://source.unsplash.com/720x400?anime`}
-                      alt="Thumbnail Image"
-                      width={720}
-                      height={400}
-                      priority
-                    />
+                  <Card.Header>
+                    <Card.Kategori slug={post.category.slug} label={post.category.name} />
+                    <Image src={photo} placeholder="blur" alt="Thumbnail Image" priority />
                   </Card.Header>
                   <Card.Content>
                     <div>
@@ -77,86 +73,4 @@ export default async function Index(): Promise<React.JSX.Element> {
       </Show>
     </div>
   );
-}
-
-{
-  /* <div className="relative flex flex-col overflow-hidden rounded-lg border-2 border-border bg-card">
-            <div className="absolute bg-background/70 px-5 py-2 font-medium backdrop-blur-md">
-              <Link href="/">Review Anime</Link>
-            </div>
-            <Image
-              src={`https://source.unsplash.com/720x400?anime`}
-              alt="Thumbnail Image"
-              width={720}
-              height={400}
-            />
-            <div className="flex flex-1 flex-col justify-between p-5">
-              <div>
-                <p className="text-muted-foreground">
-                  {formatDate(new Date().toISOString())}
-                </p>
-                <Link href="/">
-                  <h5 className="mb-2 text-2xl font-bold tracking-tight">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  </h5>
-                </Link>
-              </div>
-              <div>
-                <p className="mb-3 line-clamp-3 text-pretty font-normal text-gray-400">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
-                  quae magni voluptatibus aut voluptates dolores deleniti
-                  adipisci molestiae harum necessitatibus.
-                </p>
-                <Link
-                  href="/"
-                  className={`${buttonVariants({ variant: "default" })} w-full`}
-                >
-                  Read More
-                </Link>
-              </div>
-            </div>
-          </div> */
-}
-{
-  /* {posts.map((post) => {
-            return (
-              <div
-                key={post.id}
-                className="relative flex flex-col overflow-hidden rounded-lg border-2 border-border bg-card"
-              >
-                <div className="absolute bg-background/70 px-5 py-2 font-medium backdrop-blur-md">
-                  <Link href="/">{post.category.name}</Link>
-                </div>
-                <Image
-                  src={`https://source.unsplash.com/720x400?anime`}
-                  alt="Thumbnail Image"
-                  width={720}
-                  height={400}
-                />
-                <div className="flex flex-1 flex-col justify-between p-5">
-                  <div>
-                    <p className="text-muted-foreground">
-                      {formatDate(post.created_at.toISOString())}
-                    </p>
-                    <Link href="/">
-                      <h5 className="mb-2 text-2xl font-bold tracking-tight">
-                        {post.title}
-                      </h5>
-                    </Link>
-                  </div>
-                  <div>
-                    <p className="mb-3 line-clamp-3 text-pretty font-normal text-gray-400">
-                      {post.excerpt}
-                    </p>
-                    <Link
-                      href="/"
-                      className={`${buttonVariants({ variant: "default" })} w-full`}
-                    >
-                      Read More
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            );
-          })} */
 }
