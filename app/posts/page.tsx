@@ -29,7 +29,7 @@ export default async function Posts(): Promise<React.JSX.Element> {
           <div className="space-y-4 px-6 pb-4 md:grid md:grid-cols-2 md:gap-4 md:space-y-0 lg:grid-cols-3">
             {posts.map((post) => {
               return (
-                <Card key={post.id}>
+                <Card key={post.slug}>
                   <Card.Header>
                     <Card.Kategori slug={post.category.slug} label={post.category.name} />
                     <Image src={photo} placeholder="blur" alt="Thumbnail Image" priority />
@@ -39,7 +39,7 @@ export default async function Posts(): Promise<React.JSX.Element> {
                       <h6 className="text-muted-foreground">
                         {formatDate(post.created_at.toISOString())}
                       </h6>
-                      <Link href={`/post/${post.id}`}>
+                      <Link href={`/post/${post.slug}`}>
                         <h2 className="mb-2 text-2xl font-bold tracking-tight">{post.title}</h2>
                       </Link>
                     </div>
@@ -48,7 +48,7 @@ export default async function Posts(): Promise<React.JSX.Element> {
                         {post.excerpt}
                       </p>
                       <Link
-                        href={`/post/${post.id}`}
+                        href={`/post/${post.slug}`}
                         className={`${buttonVariants({ variant: "default" })} w-full`}
                       >
                         Read More

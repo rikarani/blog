@@ -41,7 +41,7 @@ export default async function Index(): Promise<React.JSX.Element> {
                       <h6 className="text-muted-foreground">
                         {formatDate(post.created_at.toISOString())}
                       </h6>
-                      <Link href={`/post/${post.id}`}>
+                      <Link href={`/post/${post.slug}`}>
                         <h2 className="mb-2 text-2xl font-bold tracking-tight">{post.title}</h2>
                       </Link>
                     </div>
