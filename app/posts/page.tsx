@@ -7,7 +7,7 @@ import Show from "@/components/show";
 import Card from "@/components/card";
 import prisma from "@/prisma/client";
 import Navbar from "@/components/navbar";
-import photo from "../../public/118950699_p0.png";
+import photo from "../../public/placeholder.webp";
 
 export default async function Posts(): Promise<React.JSX.Element> {
   const posts = await prisma.post.findMany({
@@ -27,7 +27,7 @@ export default async function Posts(): Promise<React.JSX.Element> {
         </Show.When>
         <Show.Else>
           <div className="space-y-4 px-6 pb-4 md:grid md:grid-cols-2 md:gap-4 md:space-y-0 lg:grid-cols-3">
-            {posts.map((post) => {
+            {posts.map((post, index) => {
               return (
                 <Card key={post.slug}>
                   <Card.Header>
