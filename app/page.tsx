@@ -8,7 +8,6 @@ import Show from "@/components/show";
 import Card from "@/components/card";
 import prisma from "@/prisma/client";
 import Navbar from "@/components/navbar";
-import photo from "../public/placeholder.webp";
 
 export default async function Index(): Promise<React.JSX.Element> {
   const posts = await prisma.post.findMany({
@@ -19,7 +18,7 @@ export default async function Index(): Promise<React.JSX.Element> {
   });
 
   return (
-    <div className={`mx-auto max-w-6xl ${posts.length === 0 ? "flex h-full flex-col" : "h-auto"}`}>
+    <div className={`mx-auto max-w-5xl ${posts.length === 0 ? "flex h-full flex-col" : "h-auto"}`}>
       <Navbar />
       <Show>
         <Show.When isTrue={posts.length === 0}>
@@ -28,13 +27,19 @@ export default async function Index(): Promise<React.JSX.Element> {
           </div>
         </Show.When>
         <Show.Else>
-          <div className="space-y-4 px-6 pb-4 md:grid md:grid-cols-2 md:gap-4 md:space-y-0 lg:grid-cols-3">
-            {posts.map((post, index) => {
+          <div className="space-y-4 px-6 pb-4 md:grid md:grid-cols-2 md:gap-4 md:space-y-0">
+            {posts.map((post) => {
               return (
                 <Card key={post.slug}>
                   <Card.Header>
                     <Card.Kategori slug={post.category.slug} label={post.category.name} />
-                    <Image src={photo} placeholder="blur" alt="Thumbnail Image" priority />
+                    <Image
+                      src="/placeholder.webp"
+                      width={640}
+                      height={400}
+                      alt="Thumbnail Image"
+                      priority
+                    />
                   </Card.Header>
                   <Card.Content>
                     <div>
@@ -60,14 +65,18 @@ export default async function Index(): Promise<React.JSX.Element> {
                 </Card>
               );
             })}
-            <Link href="/posts">
-              <div className="mt-4 grid h-full place-items-center rounded-lg border-2 border-border bg-card pb-4 md:mt-0">
-                <div className="flex flex-col items-center">
-                  <MoveRight size={64} />
-                  <h6>Lihat Post Lainnya</h6>
-                </div>
-              </div>
-            </Link>
+            <Show>
+              <Show.When isTrue={posts.length >= 5}>
+                <Link href="/posts">
+                  <div className="mt-4 grid h-full place-items-center rounded-lg border-2 border-border bg-card pb-4 md:mt-0">
+                    <div className="flex flex-col items-center">
+                      <MoveRight size={64} />
+                      <h6>Lihat Post Lainnya</h6>
+                    </div>
+                  </div>
+                </Link>
+              </Show.When>
+            </Show>
           </div>
         </Show.Else>
       </Show>
