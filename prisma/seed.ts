@@ -1,4 +1,3 @@
-import { v4 } from "uuid";
 import { env } from "process";
 import { hashSync } from "bcrypt";
 import { faker } from "@faker-js/faker/locale/id_ID";
@@ -36,12 +35,13 @@ async function main() {
   for (let i = 1; i <= numberOfPost; i++) {
     const authorIndex = faker.number.int({ min: 0, max: users.length - 1 });
     const postIndex = faker.number.int({ min: 0, max: categories.length - 1 });
+    const postSlug = faker.helpers.uniqueArray(faker.lorem.slug, numberOfPost);
 
     const post: Prisma.PostCreateInput = {
-      id: v4(),
       author: { connect: { id: users[authorIndex].id } },
       category: { connect: { id: categories[postIndex].id } },
       title: faker.lorem.sentence({ min: 4, max: 6 }),
+      slug: postSlug[i - 1],
       excerpt: faker.lorem.sentences({ min: 3, max: 5 }),
       content: `<p>${faker.lorem.paragraphs({ min: 5, max: 9 }, "</p><p>")}</p>`,
     };

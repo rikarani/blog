@@ -1,5 +1,5 @@
-import { MoveRight } from "lucide-react";
-import { formatDate, randomBetween } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
+import { randomBetween } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 
 import Link from "next/link";
@@ -9,9 +9,8 @@ import Card from "@/components/card";
 import prisma from "@/prisma/client";
 import Navbar from "@/components/navbar";
 
-export default async function Index(): Promise<React.JSX.Element> {
+export default async function Posts(): Promise<React.JSX.Element> {
   const posts = await prisma.post.findMany({
-    take: 5,
     include: {
       category: true,
     },
@@ -65,18 +64,6 @@ export default async function Index(): Promise<React.JSX.Element> {
                 </Card>
               );
             })}
-            <Show>
-              <Show.When isTrue={posts.length >= 5}>
-                <Link href="/posts">
-                  <div className="mt-4 grid h-full place-items-center rounded-lg border-2 border-border bg-card pb-4 md:mt-0">
-                    <div className="flex flex-col items-center">
-                      <MoveRight size={64} />
-                      <h6>Lihat Post Lainnya</h6>
-                    </div>
-                  </div>
-                </Link>
-              </Show.When>
-            </Show>
           </div>
         </Show.Else>
       </Show>
