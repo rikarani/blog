@@ -1,5 +1,5 @@
-import { formatDate } from "@/lib/utils";
 import { MoveRight } from "lucide-react";
+import { formatDate, randomBetween } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 
 import Link from "next/link";
@@ -34,7 +34,7 @@ export default async function Index(): Promise<React.JSX.Element> {
                   <Card.Header>
                     <Card.Kategori slug={post.category.slug} label={post.category.name} />
                     <Image
-                      src="/placeholder.webp"
+                      src={`/gambar-${randomBetween(0, 1)}.webp`}
                       width={640}
                       height={400}
                       alt="Thumbnail Image"
