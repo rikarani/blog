@@ -37,6 +37,7 @@ export default async function Posts(): Promise<React.JSX.Element> {
                       width={640}
                       height={360}
                       alt="Thumbnail Image"
+                      className="w-full"
                       priority
                     />
                   </Card.Header>
