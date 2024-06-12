@@ -35,7 +35,7 @@ export default async function Posts(): Promise<React.JSX.Element> {
                     <Image
                       src={`/gambar-${randomBetween(0, 1)}.webp`}
                       width={640}
-                      height={400}
+                      height={360}
                       alt="Thumbnail Image"
                       priority
                     />

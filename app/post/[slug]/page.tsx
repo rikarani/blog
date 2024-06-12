@@ -40,7 +40,7 @@ export default async function Post({ params }: Props): Promise<React.JSX.Element
           src={`/gambar-${randomBetween(0, 1)}.webp`}
           alt="Post Image"
           width={1200}
-          height={900}
+          height={675}
           priority
           className="mt-4 h-72 w-full object-cover"
         />
