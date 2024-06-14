@@ -17,16 +17,18 @@ export default async function Posts(): Promise<React.JSX.Element> {
   });
 
   return (
-    <div className={`mx-auto max-w-5xl ${posts.length === 0 ? "flex h-full flex-col" : "h-auto"}`}>
-      <Navbar />
+    <div className={`mx-auto max-w-6xl ${posts.length === 0 ? "flex h-full flex-col" : "h-auto"}`}>
+      <div className="mx-auto max-w-5xl">
+        <Navbar />
+      </div>
       <Show>
         <Show.When isTrue={posts.length === 0}>
-          <div className="batas grid flex-1 place-items-center px-6">
+          <div className="grid flex-1 place-items-center px-6">
             <h6 className="text-3xl font-semibold">belom ada postnya njir wkwkkwk</h6>
           </div>
         </Show.When>
         <Show.Else>
-          <div className="space-y-4 px-6 pb-4 md:grid md:grid-cols-2 md:gap-4 md:space-y-0">
+          <div className="space-y-4 px-6 pb-4 md:grid md:grid-cols-2 md:gap-4 md:space-y-0 lg:grid-cols-3">
             {posts.map((post) => {
               return (
                 <Card key={post.slug}>

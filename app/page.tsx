@@ -22,7 +22,7 @@ export default async function Index(): Promise<React.JSX.Element> {
       <Navbar />
       <Show>
         <Show.When isTrue={posts.length === 0}>
-          <div className="batas grid flex-1 place-items-center px-6">
+          <div className="grid flex-1 place-items-center px-6">
             <h6 className="text-3xl font-semibold">belom ada postnya njir wkwkkwk</h6>
           </div>
         </Show.When>
