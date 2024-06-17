@@ -1,18 +1,19 @@
 "use server";
 
+import { redirect } from "next/navigation";
 import prisma from "@/prisma/client";
 import { schema } from "../schema/login";
 
 export type State = {
   status?: "error" | "success";
   message: string;
-  fields?: Record<string, string>;
-};
+} | null;
 
 export async function login(prevState: State, formData: FormData): Promise<State> {
-  const fields = Object.fromEntries(formData);
-  const parsed = schema.safeParse(fields);
+  const username = formData.get("username");
+  const password = formData.get("password");
 
+  const parsed = schema.safeParse({ username, password });
   if (!parsed.success) {
     return {
       status: "error",
@@ -30,12 +31,8 @@ export async function login(prevState: State, formData: FormData): Promise<State
     return {
       status: "error",
       message: "Username / Password Salah",
-      fields: { username: parsed.data.username },
     };
   }
 
-  return {
-    status: "success",
-    message: "Berhasil Login",
-  };
+  redirect("/");
 }
