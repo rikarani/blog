@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Personal Blog
 
-## Getting Started
+blog ini isinya bakal random (atau bahkan takda isinya)
 
-First, run the development server:
+# bangke
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+bakal off sampe [Next-Auth](https://authjs.dev/getting-started/migrating-to-v5) jadi stable
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# belajar apa aja dari project ini?
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. File System Routing, banyak njir
+   - ada CSR, SSR, Dynamic Segment, Catch-all Segment, Optional Catch-all Segment
+2. Server Component & Client Component
+3. Prisma ORM
+   - cara install Prisma
+   - cara hubungkan Prisma ke Vercel Postgres
+   - nyoba query sederhana pake Prisma (nge-get doang)
+4. Form & Server Action
+   - Client Side Validation pake [React Hook Form](https://react-hook-form.com/get-started) & [Zod](https://zod.dev/)
+   - Validation di Server Action
+5. Authentication pake Next-Auth
+   - Login pake Credentials (Username & Password)
+6. Middleware
+   - nextjs cacat soal middleware
+7. Optimasi
+   - aaakuuu paling benci optimasi, terutama image
 
-## Learn More
+# Resource
 
-To learn more about Next.js, take a look at the following resources:
+ya kebanyakan dari Docs sih
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [NextJS Docs](https://nextjs.org/docs)
+- [Learn NextJS](https://nextjs.org/learn)
+- [React Docs](https://react.dev/)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+ada juga dari artikel
 
-## Deploy on Vercel
+- [How to use react-hook-form with Next.js Server Actions and Zod Input validation](https://nehalist.io/react-hook-form-with-nextjs-server-actions/)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+ada juga dari video
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [React Hook Form & React 19 Form Actions, The Right Way](https://www.youtube.com/watch?v=VLk45JBe8L8)
+
+- [Next-Auth on App Router - Solid Auth, Super Fast](https://www.youtube.com/watch?v=md65iBX5Gxg)
+
+- [Next-Auth v5 is Almost Here! Learn it Fast on the NextJS App Router TODAY!](https://www.youtube.com/watch?v=z2A9P1Zg1WM)
