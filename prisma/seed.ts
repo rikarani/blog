@@ -6,8 +6,8 @@ import { Prisma, PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
-  const numberOfPost = 60;
-  const numberOfUser = 5;
+  const numberOfPost = 20;
+  const numberOfUser = 2;
   const postData: Prisma.PostCreateInput[] = [];
   const userData: Prisma.UserCreateInput[] = [];
 
@@ -29,7 +29,14 @@ async function main() {
   }
 
   const users = await prisma.user.createManyAndReturn({
-    data: userData,
+    data: [
+      ...userData,
+      {
+        name: "Phasya Ananta",
+        username: env.APP_USERNAME as string,
+        password: hashSync(env.APP_SECRET as string, 12),
+      },
+    ],
   });
 
   for (let i = 1; i <= numberOfPost; i++) {
