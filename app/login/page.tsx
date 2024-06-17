@@ -1,39 +1,17 @@
 "use client";
 
-import { useRef } from "react";
 import { useFormState } from "react-dom";
-import { useForm } from "react-hook-form";
-import { Input } from "@/components/ui/input";
+import { TriangleAlert } from "lucide-react";
 import { login, State } from "@/lib/actions/login";
-import { schema, Schema } from "@/lib/schema/login";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Input } from "@/components/ui/client/input";
+import { Button, buttonVariants } from "@/components/ui/client/button";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Label } from "@/components/ui/label";
+
 import Show from "@/components/show";
 
 export default function LoginPage(): React.JSX.Element {
-  const formRef = useRef<HTMLFormElement | null>(null);
-  const [state, formAction] = useFormState<State, FormData>(login, {
-    message: "",
-  });
-
-  const form = useForm<Schema>({
-    resolver: zodResolver(schema),
-    mode: "onChange",
-    defaultValues: {
-      username: "",
-      password: "",
-      ...(state.fields ?? {}),
-    },
-  });
+  const [state, action] = useFormState<State, FormData>(login, null);
 
   return (
     <div className="flex w-full max-w-3xl overflow-hidden rounded">
@@ -42,62 +20,49 @@ export default function LoginPage(): React.JSX.Element {
       </div>
       <div className="w-full p-6 sm:flex-1">
         <Show>
-          <Show.When isTrue={state.status === "error"}>
+          <Show.When isTrue={state?.status === "error"}>
             <Alert
               variant="destructive"
-              className="bg-red-500/50 text-primary dark:border-red-500/50"
+              className="mb-4 bg-red-500/50 text-primary dark:border-red-500/50"
             >
-              <AlertTitle>Oops</AlertTitle>
-              <AlertDescription>{state.message}</AlertDescription>
+              <TriangleAlert color="white" />
+              <div className="ml-1.5">
+                <AlertTitle>Oops</AlertTitle>
+                <AlertDescription>{state?.message}</AlertDescription>
+              </div>
             </Alert>
           </Show.When>
         </Show>
-        <Form {...form}>
-          <form
-            className="mt-4"
-            ref={formRef}
-            action={formAction}
-            onSubmit={form.handleSubmit(() => formRef.current?.submit())}
-          >
-            <FormField
-              control={form.control}
+        <form action={action}>
+          <div>
+            <Label htmlFor="username">Username</Label>
+            <Input
+              id="username"
               name="username"
-              render={({ field }) => {
-                return (
-                  <FormItem className="space-y-1">
-                    <FormLabel>Username</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Username" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                );
-              }}
+              className="mt-0.5"
+              placeholder="Username"
+              required
+              minLength={1}
             />
-            <FormField
-              control={form.control}
+          </div>
+          <div className="mt-2">
+            <Label htmlFor="password">Password</Label>
+            <Input
+              id="password"
               name="password"
-              render={({ field }) => {
-                return (
-                  <FormItem className="mt-4 space-y-1">
-                    <FormLabel>Password</FormLabel>
-                    <FormControl>
-                      <Input type="password" placeholder="Password" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                );
-              }}
+              className="mt-0.5"
+              type="password"
+              placeholder="Password"
+              required
+              minLength={6}
             />
-            <Button
-              className={`${buttonVariants({ variant: "default" })} mt-4 w-full`}
-              type="submit"
-              disabled={form.formState.isSubmitting}
-            >
+          </div>
+          <div className="mt-4">
+            <Button type="submit" className={`${buttonVariants({ variant: "default" })} w-full`}>
               Login
             </Button>
-          </form>
-        </Form>
+          </div>
+        </form>
       </div>
     </div>
   );
